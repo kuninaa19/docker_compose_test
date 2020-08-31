@@ -1,0 +1,36 @@
+version: "3.7"
+services:
+  nginx:
+    image: nginx
+    ports:
+      - "80:80"
+    volumes: 
+      - ./nginx:/etc/nginx/conf.d
+    depends_on:
+      - app
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_volume:/data
+       
+  mysql:
+    build: ./mysql
+    volumes:
+      - mysql_volume:/var/lib/mysql
+    ports:
+      - "3307:3306"
+
+  app:
+    build: ./src
+    ports:
+      - "4000:3000"
+    depends_on: 
+      - redis
+      - mysql
+
+volumes:
+  mysql_volume:
+  redis_volume:
