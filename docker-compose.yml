@@ -24,12 +24,15 @@ services:
       - "3307:3306"
 
   app:
-    build: ./src
+    build: ./server
     ports:
       - "4000:3000"
-    depends_on: 
+    depends_on:
       - redis
       - mysql
+    volumes:
+      - ./src:/src
+      - /src/node_modules
 
 volumes:
   mysql_volume:

@@ -1,14 +1,15 @@
-'use strict';
+import express from 'express';
+import mysql from 'mysql';
+import path from 'path';
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
+import redis from 'redis';
 
-const express = require('express');
-const mysql = require('mysql');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-
-var usersRouter = require('./routes/users');
+import usersRouter from './routes/users.js';
 
 const app = express();
+
+const __dirname = path.resolve();
 
 const connection = mysql.createConnection({
     host:'mysql',
@@ -28,7 +29,6 @@ const connection = mysql.createConnection({
         console.log('mysql connected');
     }
 });
-const redis = require('redis');
 
 const client = redis.createClient({
   host: 'redis',
@@ -38,14 +38,17 @@ const client = redis.createClient({
 client.set('visits', 0);
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, '/views'));
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/static', express.static(path.join(__dirname, 'public')));
+
+// app.use(express.static(path.join(__dirname, 'public')));
 
 // 상수a
 const PORT = 3000;
