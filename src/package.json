@@ -2,7 +2,7 @@
     "name": "web_app",
     "version": "1.0.0",
     "description": "hotelbooking Website",
-    "author": "kuninaa19 minchan0527@naver.com>",
+    "author": "kuninaa19 minchan0527@naver.com",
     "type": "module",
     "main": "app.js",
     "bugs": {
