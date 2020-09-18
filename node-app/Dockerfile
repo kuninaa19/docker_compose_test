@@ -4,7 +4,6 @@ FROM node:12-alpine
 WORKDIR /usr/local
 
 # 앱 의존성 설치
-COPY .babelrc ./
 COPY package*.json ./
 
 RUN npm install && npm cache clean --force
