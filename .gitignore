@@ -1,2 +1,6 @@
-./node-app/node_modules
-./node-app/package-lock.json
+node-app/node_modules/
+node-app/package-lock.json
+node-app/src/public/images/
+node-app/src/public/javascripts/
+
+.idea
